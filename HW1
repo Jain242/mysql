@@ -1,0 +1,30 @@
+-- ФУНКЦИЯ ПРЕВОДА СЕКУНД
+DELIMITER //
+CREATE FUNCTION FormatSeconds (
+    totalSeconds INT
+)
+RETURNS VARCHAR(255)
+BEGIN
+    DECLARE days INT;
+    DECLARE hours INT;
+    DECLARE minutes INT;
+    DECLARE seconds INT;
+    DECLARE result VARCHAR(255);
+
+    SET days = totalSeconds DIV 86400;
+    SET totalSeconds = totalSeconds % 86400;
+
+    SET hours = totalSeconds DIV 3600;
+    SET totalSeconds = totalSeconds % 3600;
+
+    SET minutes = totalSeconds DIV 60;
+    SET seconds = totalSeconds % 60;
+
+    SET result = CONCAT(days, ' days ', hours, ' hours ', minutes, ' minutes ', seconds, ' seconds');
+
+    RETURN result;
+END //
+DELIMITER ;
+
+
+SELECT FormatSeconds(123456) 
