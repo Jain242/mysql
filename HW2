@@ -1,0 +1,40 @@
+-- ФУНКЦИЯ ВЫВОДА ЧЁТНЫХ
+DELIMITER //
+CREATE FUNCTION GetEvenNumbers()
+RETURNS VARCHAR(255)
+BEGIN
+    DECLARE result VARCHAR(255);
+    DECLARE i INT DEFAULT 1;
+
+    SET result = '';
+
+    WHILE i <= 10 DO
+        IF i % 2 = 0 THEN
+            SET result = CONCAT(result, i, ',');
+        END IF;
+        SET i = i + 1;
+    END WHILE;
+
+    RETURN result;
+END //
+DELIMITER ;
+
+SELECT GetEvenNumbers();
+
+-- ПРОЦЕДУРА ВЫОДДА ЧЁТНЫХ
+DELIMITER //
+CREATE PROCEDURE DisplayEvenNumbers()
+BEGIN
+    DECLARE i INT DEFAULT 1;
+
+    WHILE i <= 10 DO
+        IF i % 2 = 0 THEN
+            SELECT i AS even_number;
+        END IF;
+        SET i = i + 1;
+    END WHILE;
+END //
+DELIMITER ;
+
+
+CALL DisplayEvenNumbers();
